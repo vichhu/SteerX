@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>steerX Car Purchase Form</title>
+    <style>
+        /*Google Fonts*/
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        /*Variables*/
+        * {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            scroll-padding-top: 1rem;
+            scroll-behavior: smooth;
+            list-style: none;
+            text-decoration: none;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --main-color: #d90429;
+            --text-color: #020102;
+            --bg-color: #fff;
+            --star-color: #ff9d00;
+        }
+
+        /*Custom Scroll Bar */
+        html::-webkit-scrollbar {
+            width: 0.5rem;
+            background: transparent;
+        }
+
+        html::-webkit-scrollbar-thumb {
+            border-radius: 5rem;
+            background: var(--text-color);
+        }
+
+        img {
+            width: 100%;
+        }
+
+        body {
+            color: var(--text-color);
+        }
+
+        header {
+            display: block;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+
+        header.shadow {
+            background: var(--bg-color);
+            box-shadow: 4px 4px 20px rgb(15 54 55 / 10%);
+            transition: 0.5s ease;
+        }
+
+        header.shadow #search-icon {
+            color: var(--text-color);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 35px;
+        }
+
+        .logo {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        .logo span {
+            color: var(--main-color);
+            font-size: 1.8rem;
+        }
+
+        .navbar {
+            display: flex;
+            column-gap: 2rem;
+            
+        }
+
+        .navbar a {
+            color: var(--text-color);
+            font-size: 1rem;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .navbar a:hover,
+        .navbar .active {
+            color: var(--main-color);
+            border-bottom: 3px solid var(--main-color);
+        }
+
+        #search-icon {
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        .search-box {
+            position: absolute;
+            top: 110%;
+            right: 0;
+            left: 0;
+            background: var(--bg-color);
+            box-shadow: 4px 4px 20px rgb(15 54 55 /10%);
+            border: 1px solid var(--main-color);
+            border-radius: 0.5rem;
+            clip-path: circle(0% at 100% 0%);
+        }
+
+        .search-box.active {
+            clip-path: circle(144% at 100% 0%);
+            transition: 0.4s;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 20px;
+            border: none;
+            outline: none;
+            background: transparent;
+            font-size: 1rem;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-right: 3rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 5rem;
+            margin-bottom: 5rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 400;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: var(--main-color);
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        input:focus {
+            border-color: #e5b0b0 !important;
+            background-color: #f9eeee !important;
+        }
+
+        .btn:hover {
+            background: var(--text-color);
+            transition: 0.2s;
+        }
+
+        .footer {
+            padding-top: 2rem;
+            background: var(--text-color);
+            color: #f6f6f6;
+            border-top: 2px solid var(--main-color);
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .footer-container .logo {
+            color: var(--bg-color);
+            margin-bottom: 1rem;
+        }
+
+        .footer-container .footer-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .social {
+            display: flex;
+            align-items: center;
+        }
+
+        .social a {
+            font-size: 24px;
+            color: var(--bg-color);
+            margin-right: 1rem;
+        }
+
+        .social a:hover {
+            color: var(--main-color);
+        }
+
+        .footer-box h3 {
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .footer-box a,
+        .footer-box p {
+            color: #818181;
+            margin-bottom: 10px;
+        }
+
+        .footer-box a:hover {
+            color: var(--main-color);
+        }
+
+        .copyright {
+            padding: 20px;
+            text-align: center;
+            color: var(--bg-color);
+            background: var(--text-color);
+        }
+
+        .mains {
+            margin-top: 5rem;
+            margin-left: 2rem;
+            margin-right: 2rem;
+            margin-bottom: 5rem;
+        }
+
+        .heading {
+            padding-left: 3rem;
+            font-weight: 600;
+            font-size: 2rem;
+            padding-bottom: 2rem;
+
+        }
+
+        .toyota-main:hover {
+            background: #fffbec;
+            transition: 0.5s;
+        }
+
+        .toyota-main:hover img {
+            transform: scale(1.3);
+            transition: 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <!--Nav container-->
+        <div class="nav">
+            <!--Logo-->
+            <a href="index.html" class="logo">Steer<span>X</span></a>
+            <!--Navlist-->
+            <ul class="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="brands.html" class="active">Brands</a></li>
+                <li><a href="new-cars.html">New Cars</a></li>
+                <li><a href="used-cars.html">Used Cars</a></li>
+                <li><a href="login.html">Offers</a></li>
+            </ul>
+            <!--Search icon-->
+            <i class='bx bx-search' id="search-icon"></i>
+            <!--Search box-->
+            <div class="search-box container">
+                <input type="search" name="" id="" placeholder="Search here...">
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <h2>Car Purchase Form</h2><br><br>
+        <form>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="number" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" min="18" required>
+            </div>
+            <div class="form-group">
+                <label for="licenseNumber">Driver's License Number</label>
+                <input type="text" id="licenseNumber" name="licenseNumber" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" id="address" name="address" required>
+            </div>
+            <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" required>
+            </div>
+            <div class="form-group">
+                <label for="state">State</label>
+                <input type="text" id="state" name="state" required>
+            </div>
+            <div class="form-group">
+                <label for="zip">Zip Code</label>
+                <input type="number" id="zip" name="zip" required>
+            </div>
+            <a href="buy.html"> <button type="button">Proceed</button></a>
+        </form>
+    </div>
+    <!--Footer-->
+    <section class="footer">
+        <div class="footer-container">
+            <div class="footer-box">
+                <a href="index.html" class="logo">Steer<span>X</span></a>
+                <div class="social">
+                    <a href="#"><i class='bx bxl-facebook-square'></i></a>
+                    <a href="#"><i class='bx bxl-twitter'></i></a>
+                    <a href="#"><i class='bx bxl-instagram'></i></a>
+                    <a href="#"><i class='bx bxl-youtube'></i></a>
+                </div>
+            </div>
+            <div class="footer-box">
+                <h3>Page</h3>
+                <a href="index.html">Home</a>
+                <a href="brands.html">Brands</a>
+                <a href="new-cars.html">New Cars</a>
+                <a href="used-cars.html">Used Cars</a>
+                <a href="login.html">Offers</a>
+            </div>
+            <div class="footer-box">
+                <h3>Legal</h3>
+                <a href="legal.html#privacy-policy">Privacy</a>
+                <a href="legal.html#refund-policy">Refund Policy</a>
+                <a href="legal.html#cookie-policy">Cookie Policy</a>
+            </div>
+            <div class="footer-box">
+                <h3>Contact</h3>
+                <a href="about.html#contact">Mangalore</a>
+                <a href="about.html#contact">Bangalore</a>
+                <a href="about.html#contact">Mumbai</a>
+                <a href="about.html#contact">New Delhi</a>
+                <a href="about.html#contact">Chennai</a>
+                <a href="about.html#contact">Kolkata</a>
+            </div>
+        </div>
+        <!--Copyright-->
+        <div class="copyright">
+            <p>&#169; X-Group All Rights Reserved</p>
+        </div>
+    </section>
+    <!--Link to JavaScript-->
+    <script src="main.js"></script>
+</body>
+
+</html>
